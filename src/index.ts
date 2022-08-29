@@ -1,8 +1,10 @@
 require('dotenv').config();
 import axios from 'axios';
 import {setTimeout} from 'timers/promises';
+import {faker} from '@faker-js/faker';
 
 let token: string;
+const skuId = [38611, 38612, 38610];
 
 const axiosInstance = axios.create({
   baseURL: 'https://sandbox-api.violet.io/v1',
@@ -19,13 +21,17 @@ const run = async () => {
   await getToken();
   console.log('acquired token');
   for (let i = 0; i < 100; i++) {
-    const beginTime = Date.now();
-    await createCart();
-    const endTime = Date.now();
-    const time = endTime - beginTime;
-    console.log(time);
-    times.push(time);
-    await setTimeout(5000);
+    try {
+      const beginTime = Date.now();
+      await createCart();
+      const endTime = Date.now();
+      const time = endTime - beginTime;
+      console.log(time);
+      times.push(time);
+    } catch (e) {
+      console.log(e);
+    }
+    await setTimeout(10000);
   }
   console.log(`Average: ${times.reduce((a, b) => a + b, 0) / times.length}`);
 }
@@ -46,7 +52,7 @@ const createCart = async () => {
     .post('/checkout/cart', {
       "skus": [
         {
-          "sku_id": 38611,
+          "sku_id": faker.helpers.arrayElement(skuId),
           "quantity": 1
         }
       ],
