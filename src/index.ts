@@ -34,6 +34,8 @@ const run = async () => {
     await setTimeout(10000);
   }
   console.log(`Average: ${times.reduce((a, b) => a + b, 0) / times.length}`);
+  console.log(`Max: ${Math.max(...times)}`);
+  console.log(`Min: ${Math.min(...times)}`);
 }
 
 const getToken = async () => {
