@@ -4,7 +4,7 @@ import {setTimeout} from 'timers/promises';
 import {faker} from '@faker-js/faker';
 
 let token: string;
-const skuId = [38611, 38612, 38610];
+const skuId = JSON.parse(process.env.SKU_IDS!);
 
 const axiosInstance = axios.create({
   baseURL: 'https://sandbox-api.violet.io/v1',
