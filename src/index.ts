@@ -7,7 +7,7 @@ let token: string;
 const skuId = JSON.parse(process.env.SKU_IDS!);
 
 const axiosInstance = axios.create({
-  baseURL: 'https://sandbox-api.violet.io/v1',
+  baseURL: process.env.VIOLET_URL,
   headers: {
     'X-Violet-App-Secret': process.env.VIOLET_SECRET!,
     'X-Violet-App-Id': process.env.VIOLET_APP_ID!,
